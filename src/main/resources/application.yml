@@ -1,0 +1,40 @@
+server:
+  port: 8080
+eureka:
+   client:
+      service-url:
+         default-zone: http://localhost:8761/eureka
+okta:
+  oauth2:
+    issuer-uri: https://dev-63954939.okta.com/oauth2/default
+    client-id: 0oa7451v81v4EeUIE5d7
+    client-secret: p5OyBKFMohHIzfjKPdPUb5lk9fdsr_iuwH7IxHUq
+spring:
+   application:
+      name: post-service
+   cloud:
+      stream:
+         function:
+           definition: postSupplier
+         bindings:
+           postSupplier-out-0:
+             destination: post-event
+         kafka:
+           bindings:
+             postSupplier-out-0:
+               producer:
+                 configuration:
+                   value:
+                     serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+   data:
+      mongodb: 
+         database: instaposts
+   security:
+      oauth2:
+         resourceserver:
+           jwt:
+             issuer-uri: https://dev-63954939.okta.com/oauth2/default
+             client-id: 0oa7451v81v4EeUIE5d7
+             client-secret: p5OyBKFMohHIzfjKPdPUb5lk9fdsr_iuwH7IxHUq
+   
+             
