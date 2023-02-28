@@ -1,14 +1,10 @@
 server:
   port: 8080
-eureka:
-   client:
-      service-url:
-         default-zone: http://localhost:8761/eureka
 okta:
   oauth2:
-    issuer-uri: https://dev-63954939.okta.com/oauth2/default
-    client-id: 0oa7451v81v4EeUIE5d7
-    client-secret: p5OyBKFMohHIzfjKPdPUb5lk9fdsr_iuwH7IxHUq
+    issuer: ${OKTA_ISSUER}
+    client-id: ${CLIENT_ID}
+    client-secret: ${CLIENT_SECRET}
 spring:
    application:
       name: post-service
@@ -28,13 +24,15 @@ spring:
                      serializer: org.apache.kafka.common.serialization.ByteArraySerializer
    data:
       mongodb: 
-         database: instaposts
+         database: ${MONGO_DB_NAME}
+         host: ${MONGO_HOST}
+         port: ${MONGO_PORT}
    security:
       oauth2:
          resourceserver:
            jwt:
-             issuer-uri: https://dev-63954939.okta.com/oauth2/default
-             client-id: 0oa7451v81v4EeUIE5d7
-             client-secret: p5OyBKFMohHIzfjKPdPUb5lk9fdsr_iuwH7IxHUq
+             issuer: ${OKTA_ISSUER}
+             client-id: ${CLIENT_ID}
+             client-secret: ${CLIENT_SECRET}
    
              
