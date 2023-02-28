@@ -12,17 +12,17 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableReactiveMongoAuditing
 @EnableWebSecurity
 public class SecurityConfig {
-	     
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().authenticated().and().oauth2ResourceServer().jwt();
-		http.cors();
+		http.authorizeRequests().anyRequest().authenticated().and().oauth2ResourceServer(
+				oauth2 -> oauth2.jwt(jwt -> jwt.jwkSetUri("https://dev-63954939.okta.com/.well-known/jwks.json")));
+		// http.cors();
 		return http.build();
 	}
 
 	@Bean
-    public ReactiveAuditorAware<String> myAuditorProvider() {
-        return new UserAuditing();
-    }
+	public ReactiveAuditorAware<String> myAuditorProvider() {
+		return new UserAuditing();
+	}
 }
