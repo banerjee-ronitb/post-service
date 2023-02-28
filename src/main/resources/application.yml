@@ -8,6 +8,8 @@ okta:
 spring:
    application:
       name: post-service
+   kafka:
+      bootstrap-servers: ${KAFKA_URL}
    cloud:
       stream:
          function:
