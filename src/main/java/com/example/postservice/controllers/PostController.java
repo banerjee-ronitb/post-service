@@ -33,9 +33,7 @@ public class PostController {
 
 	@Autowired
 	private PostService postService;
-	
-//	@Autowired
-//	private OAuth2AuthorizedClientService clientService;
+
 
 	@GetMapping("/posts")
 	@PreAuthorize("hasAuthority('SCOPE_profile')")
